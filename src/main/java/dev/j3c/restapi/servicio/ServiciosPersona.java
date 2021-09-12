@@ -25,7 +25,7 @@ public class ServiciosPersona implements InterfazServiciosPersona{
 
     @Override
     public Persona guardar(Persona persona) {
-        return null;
+        return data.save(persona);
     }
 
     @Override
@@ -35,6 +35,6 @@ public class ServiciosPersona implements InterfazServiciosPersona{
 
     @Override
     public Persona actualizar(Persona persona) {
-        return null;
+        return data.save(persona);
     }
 }
