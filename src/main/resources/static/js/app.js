@@ -45,26 +45,20 @@ const obtenerPersonas = async function(){
     }
 }
 
-const FetchingresarOActualizar = function(options) {
-    const {method, url, success, error, data} = options;
-    fetch(url,{
-        method,
+const ingresarNuevaPersona = function(nombre,apellido,edad,telefono,genero) {
+    fetch("http://localhost:8080/api/persona/guardar", {
+        method:"POST",
         headers: {
             "content-type": "application/json; charset=utf-8"
         },
-        body: JSON.stringify({
-            nombre: data.nombre,
-            apellido: data.apellido,
-            edad: data.edad,
-            telefono: data.telefono,
-            genero: data.genero
-        })
+        body: JSON.stringify({nombre, apellido, edad, telefono, genero})
     })
     .then(res => {
-        if(res.ok) {
-            success(res.json());
+        if (res.ok) {
+            location.reload();
+            alert("Se ha ingresado la nueva persona exitosamente.");
         } else {
-            Promise.reject("Se ha producido un error al intentar ingresar el nuevo usuario");
+            Promise.reject("Se ha producido un error al intentar ingresar la nueva persona.");
         }
     })
     .catch(err => {
@@ -72,59 +66,47 @@ const FetchingresarOActualizar = function(options) {
     })
 }
 
-const ingresarNuevaPersona = function(id,nombre,apellido,edad,telefono,genero) {
-    FetchingresarOActualizar({
-        method:'POST',
-        url: 'http://localhost:8080/api/persona/guardar',
-        success: function(data) {
-            alert(`El usuario se ha creado correctamente!`);
-            location.reload();
-        },
-        error: function(mensaje) {
-            $table.insertAdjacentElement('afterend',`<p><b>${mensaje}</b></p>`);
-        },
-        data: {
-            nombre,
-            apellido,
-            edad,
-            telefono,
-            genero
-        }
-    });
-}
-
 const actualizarPersona = function(id,nombre,apellido,edad,telefono,genero){
-    FetchingresarOActualizar({
-        method:'PUT',
-        url: `http://localhost:8080/api/persona/${id}`,
-        success: function(data) {
-            alert(`El usuario se ha actualizado correctamente!`);
+    fetch(`http://localhost:8080/api/persona/actualizar`, {
+        method:"PUT",
+        headers: {
+            "content-type": "application/json; charset=utf-8"
+        },
+        body: JSON.stringify({id,nombre, apellido, edad, telefono, genero})
+    })
+    .then(res => {
+        if (res.ok) {
             location.reload();
-        },
-        error: function(mensaje) {
-            $table.insertAdjacentElement('afterend',`<p><b>${mensaje}</b></p>`);
-        },
-        data: {
-            nombre,
-            apellido,
-            edad,
-            telefono,
-            genero
+            alert("La persona con id "+ id + " se ha actualizado exitosamente.");
+        } else {
+            Promise.reject("Se ha producido un error al intentar actualizar la persona con id " + id);
         }
-    });
+    })
+    .catch(err => {
+        error(err);
+    })
 }
 
-const eliminarPersona = async function(id) {
-    try{
-        let res = await fetch(`http://localhost:8080/api/persona/${id}`, {method:"DELETE"});
-        if(!res.ok) {
-            throw {status: res.status , statusText: res.statusText}
+const eliminarPersona = function(id) {
+    fetch(`http://localhost:8080/api/persona/${id}`, {
+        method:"DELETE",
+        headers: {
+            "content-type": "application/json; charset=utf-8"
+        },
+        body: JSON.stringify({id})
+    })
+    .then(res => {
+        if (res.ok) {
+            location.reload();
+            alert("La persona con id "+ id + " se ha removido del sistema exitosamente.");
+        } else {
+            Promise.reject("Se ha producido un error al intentar actualizar la persona con id " + id);
         }
-        location.reload();
-    } catch(error) {
+    })
+    .catch(err => {
         let mensaje = error.statusText || "Ha ocurrido un error";
-        alert(`Error al intentar eliminar la persona: ${error}: ${mensaje}`);
-    }
+        alert(`Error al intentar eliminar la persona: ${err}: ${mensaje}`);
+    })
 }
 
 document.addEventListener('submit',function (e){
@@ -138,7 +120,7 @@ document.addEventListener('submit',function (e){
             genero = $form.genero.value;
         if(!id) {
             //Operación --> Guardar una nueva persona
-            ingresarNuevaPersona(id,nombre,apellido,edad,telefono,genero);
+            ingresarNuevaPersona(nombre,apellido,edad,telefono,genero);
         } else {
             //Operación --> Actualizar una persona
             actualizarPersona(id,nombre,apellido,edad,telefono,genero);
