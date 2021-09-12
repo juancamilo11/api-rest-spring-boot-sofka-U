@@ -1,0 +1,16 @@
+body {
+    background-color: #A8E7E9;
+    font-family: 'JetBrains Mono',
+    monospace;
+}
+
+h1 {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+h2 {
+    text-align: center;
+    margin-top:20px;
+    margin-bottom: 20px;
+}
