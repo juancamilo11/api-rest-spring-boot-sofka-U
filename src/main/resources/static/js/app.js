@@ -8,6 +8,34 @@ const $tableTemplate = document.getElementById('tbody-template').content;
 const $tableFragment = document.createDocumentFragment();
 
 
+const ingresarOActualizar = function(options) {
+    const {method, url, success, error, data} = options;
+    fetch(url,{
+        method,
+        headers: {
+            "content-type": "application/json; charset=utf-8"
+        },
+        body: JSON.stringify({
+            nombre: data.nombre,
+            apellido: data.apellido,
+            edad: data.edad,
+            telefono: data.telefono,
+            genero: data.genero
+        })
+    })
+    .then(res => {
+        if(res.ok) {
+            success(res.json());
+        } else {
+            Promise.reject("Se ha producido un error al intentar ingresar el nuevo usuario");
+        }
+    })
+    .catch(err => {
+        error(err);
+    })
+}
+
+
 const obtenerPersonas = async function(){
     try{
         let res = await fetch("http://localhost:8080/api/persona/listar"),
@@ -45,6 +73,9 @@ const obtenerPersonas = async function(){
         alert(`Error ${error.status}: ${mensaje}`);
     }
 }
+
+
+
 
 window.addEventListener('load', obtenerPersonas);
 
