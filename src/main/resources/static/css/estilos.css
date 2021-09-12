@@ -14,3 +14,47 @@ h2 {
     margin-top:20px;
     margin-bottom: 20px;
 }
+
+
+#form-ingreso {
+    width: 100%;
+    margin: 20px auto;
+    text-align: center;
+}
+
+.form-ingreso__label {
+    font-weight:bold;
+}
+
+.form__input {
+    display: block;
+    background-color:#ddd;
+    height: 30px;
+    width: 60%;
+    max-width: 400px;
+    min-width: 300px;
+    margin: 3px auto;
+    margin-bottom:30px;
+    border: 1px solid black;
+    border-radius: 5px;
+    font-size:1.1em;
+    text-indent: 10px;
+    cursor:pointer;
+}
+
+.form__input::placeholder {
+    color:#333;
+    padding-left: 5px;
+    margin-left: 5px;
+}
+
+#btn-ingreso{
+    width: 15%;
+    padding-right: 2%;
+    font-size: 15px;
+    height: 30px;
+    max-width: 200px;
+    min-width: 140px;
+    cursor: pointer;
+    background-color:#aaa;
+}
