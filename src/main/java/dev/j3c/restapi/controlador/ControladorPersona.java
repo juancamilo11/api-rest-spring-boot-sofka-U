@@ -29,5 +29,8 @@ public class ControladorPersona {
         return servicio.actualizar(persona);
     }
 
-
+    @DeleteMapping("/borrar")
+    private void actualizarPersona(@RequestBody Integer id){
+        servicio.borrar(id);
+    }
 }
