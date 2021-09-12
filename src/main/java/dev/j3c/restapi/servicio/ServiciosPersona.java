@@ -30,7 +30,10 @@ public class ServiciosPersona implements InterfazServiciosPersona{
 
     @Override
     public void borrar(int id) {
-        data.deleteById(id);
+        boolean existe = data.existsById(id);
+        if(existe) {
+            data.deleteById(id);
+        }
     }
 
     @Override

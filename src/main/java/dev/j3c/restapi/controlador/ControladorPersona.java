@@ -7,6 +7,8 @@ import dev.j3c.restapi.servicio.InterfazServiciosPersona;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import javax.swing.*;
+
 @RestController
 @RequestMapping("api/persona")
 public class ControladorPersona {
@@ -29,8 +31,8 @@ public class ControladorPersona {
         return servicio.actualizar(persona);
     }
 
-    @DeleteMapping("/borrar")
-    private void actualizarPersona(@RequestBody Integer id){
+    @DeleteMapping(path="{id}")
+    private void borrarPersona(@PathVariable("id") Integer id){
         servicio.borrar(id);
     }
 }
