@@ -12,6 +12,33 @@
 </head>
 <body>
     <h1>Sistema de Manejo de Personas con Spring Boot | Sofka U</h1>
+    <section class="container">
+        <form id="form-ingreso" name="form__ingreso">
 
+            <!--Input de tipo hidden para el id de la persona-->
+            <input type="hidden" name="id">
+
+            <label class="form-ingreso__label" for="nombre">Nombre</label>
+            <input type="text" id="nombre" class="form__input" name="nombre" maxlength="50" required>
+
+            <label class="form-ingreso__label" for="apellido">Apellido</label>
+            <input type="text" id="apellido" class="form__input" name="apellido" maxlength="50" required>
+
+            <label class="form-ingreso__label" for="edad">Edad</label>
+            <input type="number" id="edad" class="form__input" name="edad" min="1"  max="120" required>
+
+            <label class="form-ingreso__label" for="telefono">Teléfono</label>
+            <input type="string" id="telefono" class="form__input" name="telefono" maxlength="50" required>
+
+            <label class="form-ingreso__label" for="genero">Género</label>
+            <select name="genero" class="form__input" id="genero">
+                <option value="m">Masculino</option>
+                <option value="f">Femenino</option>
+                <option value="o">Otro</option>
+            </select>
+            <input type="submit" id="btn-ingreso" class="form__input btn-ingreso" value="Ingresar Persona">
+        </form>
+
+    </section>
 </body>
 </html>
