@@ -50,13 +50,16 @@ h2 {
 
 #btn-ingreso{
     width: 15%;
-    padding-right: 2%;
+    padding:10px;
+    text-indent: revert;
+    padding-bottom: 30px;
     font-size: 15px;
+    font-weight: 600;
     height: 30px;
     max-width: 200px;
     min-width: 140px;
     cursor: pointer;
-    background-color:#aaa;
+    background-color:#999;
 }
 
 
@@ -72,6 +75,7 @@ h2 {
 
 .users-table{
     text-align:center;
+    width: 100%;
     font-weight:600;
 }
 
@@ -81,4 +85,27 @@ h2 {
     border-radius: 5px;
     border: 1px solid black;
     font-weight: 600;
+}
+
+.input-buscar {
+    background-color:#ddd;
+    height: 30px;
+    width: 60%;
+    max-width: 400px;
+    min-width: 300px;
+    margin: 3px auto;
+    margin-bottom:30px;
+    border: 1px solid black;
+    border-radius: 5px;
+    font-size:1.1em;
+    text-indent: 10px;
+    cursor:pointer;
+}
+
+.buscar-persona {
+    display:flex;
+    width: 100%;
+    align-items: center;
+    flex-direction: column;
+
 }

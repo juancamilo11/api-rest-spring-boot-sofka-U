@@ -7,6 +7,8 @@ const $tableBody = document.querySelector('.users-table__body');
 const $tableTemplate = document.getElementById('tbody-template').content;
 const $tableFragment = document.createDocumentFragment();
 
+const $btnBuscar = document.getElementById("btn-buscar-id");
+
 const obtenerPersonas = async function(){
     try{
         let res = await fetch("http://localhost:8080/api/persona/listar"),
@@ -150,6 +152,48 @@ document.addEventListener('click',(event) => {
         }
     }
 });
+
+const obtenerPersonaPorId = async function (idBuscar) {
+    try{
+        const res = await fetch(`http://localhost:8080/api/persona/${idBuscar}`,{method:"GET"});
+        const json = await res.json();
+        if(!res.ok || (json.nombre == null && json.apellido == null)) {
+            throw {status: res.status, statusText: res.statusText};
+        }
+        window.alert("La persona con id: " + idBuscar + " tiene la siguiente información: \n" +
+            "Nombre completo: " + json.nombre + " " + json.apellido + "\n" +
+            ", Edad: " + json.edad + " años" + ", Teléfono: " + json.telefono + ", Género: " + json.genero);
+    }
+    catch(error){
+        let mensaje = error.statusText || "Ha ocurrido un error al intentar cargar la persona, posiblemente la persona no existe.";
+        alert(`Error ${error.status}: ${mensaje}`);
+    }
+}
+
+document.addEventListener('submit',function (e){
+    if(e.target === $form) {
+        e.preventDefault();
+        const id = $form.id.value,
+            nombre = $form.nombre.value,
+            apellido = $form.apellido.value,
+            edad = $form.edad.value,
+            telefono = $form.telefono.value,
+            genero = $form.genero.value;
+        if(!id) {
+            //Operación --> Guardar una nueva persona
+            ingresarNuevaPersona(nombre,apellido,edad,telefono,genero);
+        } else {
+            //Operación --> Actualizar una persona
+            actualizarPersona(id,nombre,apellido,edad,telefono,genero);
+        }
+    }
+})
+
+$btnBuscar.addEventListener('click', function () {
+    const $campoIdBusqueda = document.getElementById("input-id-busqueda");
+    const idBuscar = parseInt($campoIdBusqueda.value);
+    obtenerPersonaPorId(idBuscar);
+})
 
 window.addEventListener('load', obtenerPersonas);
 
