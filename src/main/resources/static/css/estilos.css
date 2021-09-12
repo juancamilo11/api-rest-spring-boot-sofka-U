@@ -58,3 +58,27 @@ h2 {
     cursor: pointer;
     background-color:#aaa;
 }
+
+
+.users-table__head {
+    font-weight: 600;
+}
+
+.users-table__head td {
+    padding: 10px 10px;
+    font-size: 18px;
+    font-weight:900;
+}
+
+.users-table{
+    text-align:center;
+    font-weight:600;
+}
+
+.template__button {
+    background-color:#999;
+    padding:10px;
+    border-radius: 5px;
+    border: 1px solid black;
+    font-weight: 600;
+}
