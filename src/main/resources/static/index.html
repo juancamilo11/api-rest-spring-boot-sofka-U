@@ -38,7 +38,36 @@
             </select>
             <input type="submit" id="btn-ingreso" class="form__input btn-ingreso" value="Ingresar Persona">
         </form>
-
     </section>
+    <h2>Tabla de Personas Ingresadas en el Sistema</h2>
+    <section class="container">
+        <table class="users-table">
+            <thead class="users-table__head">
+            <tr>
+                <td>Nombre</td>
+                <td>Apellido</td>
+                <td>Edad</td>
+                <td>Teléfono</td>
+                <td>Género</td>
+                <td>Acción</td>
+            </tr>
+            </thead>
+            <tbody class="users-table__body"></tbody>
+        </table>
+    </section>
+    <template id="tbody-template">
+        <tr>
+            <td class="template__id"></td>
+            <td class="template__nombre"></td>
+            <td class="template__apellido"></td>
+            <td class="template__edad"></td>
+            <td class="template__telefono"></td>
+            <td class="template__genero"></td>
+            <td class="template__accion">
+                <button class="template__button btn-editar">Editar Persona</button>
+                <button class="template__button btn-eliminar">Eliminar Persona</button>
+            </td>
+        </tr>
+    </template>
 </body>
 </html>
