@@ -35,6 +35,67 @@ const ingresarOActualizar = function(options) {
     })
 }
 
+const ingresarNuevaPersona = function(id,nombre,apellido,edad,telefono,genero) {
+    ingresarOActualizar({
+        method:'POST',
+        url: 'http://localhost:8080/api/persona/guardar',
+        success: function(data) {
+            alert(`El usuario se ha creado correctamente!`);
+            location.reload();
+        },
+        error: function(mensaje) {
+            $table.insertAdjacentElement('afterend',`<p><b>${mensaje}</b></p>`);
+        },
+        data: {
+            nombre,
+            apellido,
+            edad,
+            telefono,
+            genero
+        }
+    });
+}
+
+const actualizarPersona = function(id,nombre,apellido,edad,telefono,genero){
+    ingresarOActualizar({
+        method:'PUT',
+        url: `http://localhost:8080/api/persona/${id}`,
+        success: function(data) {
+            alert(`El usuario se ha actualizado correctamente!`);
+            location.reload();
+        },
+        error: function(mensaje) {
+            $table.insertAdjacentElement('afterend',`<p><b>${mensaje}</b></p>`);
+        },
+        data: {
+            nombre,
+            apellido,
+            edad,
+            telefono,
+            genero
+        }
+    });
+}
+
+document.addEventListener('submit',function (e){
+    if(e.target === $form) {
+        e.preventDefault();
+        const id = $form.id.value,
+            nombre = $form.nombre.value,
+            apellido = $form.apellido.value,
+            edad = $form.edad.value,
+            telefono = $form.telefono.value,
+            genero = $form.genero.value;
+        if(!id) {
+            //Operación --> Guardar una nueva persona
+            ingresarNuevaPersona(id,nombre,apellido,edad,telefono,genero);
+        } else {
+            //Operación --> UPDATE
+            actualizarPersona(id,nombre,apellido,edad,telefono,genero);
+        }
+    }
+});
+
 
 const obtenerPersonas = async function(){
     try{
@@ -73,8 +134,6 @@ const obtenerPersonas = async function(){
         alert(`Error ${error.status}: ${mensaje}`);
     }
 }
-
-
 
 
 window.addEventListener('load', obtenerPersonas);
