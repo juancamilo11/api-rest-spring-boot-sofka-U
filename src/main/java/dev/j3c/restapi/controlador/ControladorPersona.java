@@ -1,0 +1,11 @@
+package dev.j3c.restapi.controlador;
+
+
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+@RestController
+@RequestMapping("api/persona")
+public class ControladorPersona {
+
+}
