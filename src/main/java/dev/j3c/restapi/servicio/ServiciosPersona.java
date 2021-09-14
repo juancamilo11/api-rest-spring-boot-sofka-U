@@ -32,14 +32,17 @@ public class ServiciosPersona implements InterfazServiciosPersona{
 
     @Override
     public void borrar(int id) {
-        boolean existe = data.existsById(id);
-        if(existe) {
+        if (data.findById(id).isPresent()){
             data.deleteById(id);
         }
     }
 
     @Override
     public Persona actualizar(Persona persona) {
-        return data.save(persona);
+        Persona personaResult = new Persona();
+        if (data.findById(persona.getId()).isPresent()){
+            personaResult = data.save(personaResult);
+        }
+        return personaResult;
     }
 }
